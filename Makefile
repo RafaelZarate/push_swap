@@ -21,6 +21,7 @@ CFILES_P = src/libft/libft.a \
 			src/push_swap/list_functions.c \
 			src/push_swap/operations_1.c \
 			src/push_swap/operations_2.c \
+			src/push_swap/operations_3.c \
 			src/push_swap/utilities.c
 
 OBJECTS_C = $(CFILES_C:.c=.o)
@@ -46,6 +47,13 @@ $(NAME_P):
 	@echo "LIBFT: Library successfully compiled"
 	@$(CC) $(CFLAGS) -I. $(CFILES_P) -o $(NAME_P) 
 	@echo "PUSH_SWAP: Successfull compilation"
+
+rps:
+	@/bin/rm -f $(OBJECTS_P)
+	@/bin/rm -f $(NAME_P)
+	@$(LIBM)
+	@$(CC) $(CFLAGS) -I. $(CFILES_P) -o $(NAME_P) 
+	@echo "Push swap recompiled"
 
 clean:
 	@$(LIBC)

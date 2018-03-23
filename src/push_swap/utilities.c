@@ -6,34 +6,16 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:56:57 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/22 10:15:24 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/23 09:25:56 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/checker.h"
+#include "../../include/push_swap.h"
 
 void	put_error(int n)
 {
 	ft_putstr_fd("Error", 2);
 	exit (n);
-}
-
-void	do_ss(t_stacks *stacks)
-{
-	do_sa(stacks);
-	do_sb(stacks);
-}
-
-void	do_rr(t_stacks *stacks)
-{
-	do_ra(stacks);
-	do_rb(stacks);
-}
-
-void	do_rrr(t_stacks *stacks)
-{
-	do_rra(stacks);
-	do_rrb(stacks);
 }
 
 void	handle_ops(char *operations, t_stacks *stacks)
@@ -62,4 +44,59 @@ void	handle_ops(char *operations, t_stacks *stacks)
 		do_rrr(stacks);
 	else
 		put_error(4);
+}
+
+void	print_stacks(t_stacks *stacks)
+{
+	ft_putstr("Stack A: ");
+	t_stack *a;
+	a = stacks->a;
+	while (a)
+	{
+		ft_putnbr(a->n);
+		ft_putchar(' ');
+		a = a->next;
+	}
+	ft_putchar('\n');
+	ft_putstr("Stack B: ");
+	t_stack *b;
+	b = stacks->b;
+	while (b)
+	{
+		ft_putnbr(b->n);
+		ft_putchar(' ');
+		b = b->next;
+	}
+	ft_putchar('\n');
+}
+
+void	get_min_max(t_stacks *stacks)
+{
+	t_stack	*a;
+	t_stack	*b;
+	int		min;
+	int		max;
+
+	max = INT_MIN;
+	min = INT_MAX;
+	a = stacks->a;
+	b = stacks->b;
+	while (a)
+	{
+		if (a->n > max)
+			max = a->n;
+		if (a->n < min)
+			min = a->n;
+		a = a->next;
+	}
+	max = INT_MIN;
+	min = INT_MAX;
+	while (b)
+	{
+		if (b->n > max)
+			max = b->n;
+		if (b->n < min)
+			min = b->n;
+		b = b->next;
+	}
 }

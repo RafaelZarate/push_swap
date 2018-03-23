@@ -6,11 +6,11 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 03:47:44 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/22 08:02:44 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/23 01:09:43 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/checker.h"
+#include "../../include/push_swap.h"
 
 t_stack	*stack_new(int num)
 {

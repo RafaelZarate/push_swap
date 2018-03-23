@@ -6,11 +6,11 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 08:08:43 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/22 10:38:57 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/23 05:20:54 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/checker.h"
+#include "../../include/push_swap.h"
 
 void	do_sa(t_stacks *stacks)
 {
@@ -25,6 +25,7 @@ void	do_sa(t_stacks *stacks)
 		tmp2->next = tmp1;
 		stacks->a = tmp2;
 	}
+	ft_putstr("sa\n");
 }
 
 void	do_sb(t_stacks *stacks)
@@ -40,12 +41,12 @@ void	do_sb(t_stacks *stacks)
 		tmp2->next = tmp1;
 		stacks->b = tmp2;
 	}
+	ft_putstr("sb\n");
 }
 
 void	do_pb(t_stacks *stacks)
 {
 	t_stack *tmp;
-	// t_stack *tmp2;
 	
 	if ((tmp = stacks->a))
 	{
@@ -55,12 +56,12 @@ void	do_pb(t_stacks *stacks)
 		stacks->length_a--;
 		stacks->length_b++;
 	}
+	ft_putstr("pb\n");
 }
 
 void	do_pa(t_stacks *stacks)
 {
 	t_stack *tmp;
-	// t_stack *tmp2;
 	
 	if ((tmp = stacks->b))
 	{
@@ -70,4 +71,5 @@ void	do_pa(t_stacks *stacks)
 		stacks->length_a++;
 		stacks->length_b--;
 	}
+	ft_putstr("pa\n");
 }

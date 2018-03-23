@@ -6,11 +6,11 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 06:33:15 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/22 10:15:42 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/23 09:13:50 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/checker.h"
+#include "../../include/push_swap.h"
 
 void	search_equals(t_stacks *stacks, int num)
 {
@@ -41,8 +41,77 @@ void	parser(t_stacks *stacks, char **input, int ac)
 		}
 		n = ft_atoi(input[ac]);
 		search_equals(stacks, n);
-		if (n > 2147483647 || n < -2147483648)
+		if (n > INT_MAX || n < INT_MIN)
 			put_error(2);
 		stack_add(&stacks->a, stack_new((int)n));
+	}
+}
+
+void	get_current_position(t_stacks *stacks)
+{
+	t_stack *a;
+	t_stack *b;
+
+	a = stacks->a;
+	b = stacks->b;
+	if (a)
+	{
+		stacks->a_first = a->n;
+		if (a->next)
+		{
+			stacks->a_second = a->next->n;
+			while(a->next)
+				a = a->next;
+			stacks->a_last = a->n;
+		}
+	}
+	if (b)
+	{
+		stacks->b_first = b->n;
+		if (b->next)
+		{
+			stacks->b_second = b->next->n;
+			while(b->next)
+				b = b->next;
+			stacks->b_last = b->n;
+		}
+	}
+}
+
+int	check_if_rev_sorted(t_stacks *stacks)
+{
+	t_stack	*b;
+
+	b = stacks->b;
+	if (b == NULL)
+		return (0);
+	else
+	{
+		while (b->next != NULL)
+		{
+			if (b->n < b->next->n)
+				return (0);
+			b = b->next;
+		}
+		return (1);
+	}
+}
+
+int	check_if_sorted(t_stacks *stacks)
+{
+	t_stack	*a;
+
+	a = stacks->a;
+	if (a == NULL)
+		return (0);
+	else
+	{
+		while (a->next != NULL)
+		{
+			if (a->n > a->next->n)
+				return (0);
+			a = a->next;
+		}
+		return (1);
 	}
 }

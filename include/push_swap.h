@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 03:18:40 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/23 00:29:40 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/23 09:10:18 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,26 @@ typedef	struct	s_stacks
 	int		n_ops;
 	int		length_a;
 	int		length_b;
-	int		a_max;
-	int		b_max;
-	int		a_min;
-	int		b_min;
-	float	a_med;
-	float	b_med;
+	int		max_a;
+	int		max_b;
+	int		min_a;
+	int		min_b;
+	int		a_first;
+	int		a_second;
+	int		a_last;
+	int		b_first;
+	int		b_second;
+	int		b_last;
 }				t_stacks;
+
+/*
+**	MACROS
+*/
+
+# define TRUE  1
+# define FALSE 0
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 /*
 **	MAIN FUNCTIONS
@@ -43,7 +56,18 @@ typedef	struct	s_stacks
 void		parser(t_stacks *stacks, char **input, int ac);
 void		handle_ops(char *operations, t_stacks *stacks);
 void		put_error(int n);
+void		print_stacks(t_stacks *stacks);
+
+/*
+**	SOLVER
+*/
+
 void		solver(t_stacks *stacks);
+void		get_current_position(t_stacks *stacks);
+int			check_if_sorted(t_stacks *stacks);
+int			check_if_rev_sorted(t_stacks *stacks);
+void		sort_a(t_stacks *stacks);
+void		sort_b(t_stacks *stacks);
 
 /*
 **	OPERATIONS
