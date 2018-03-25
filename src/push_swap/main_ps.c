@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 10:56:35 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/23 05:09:38 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/25 02:29:25 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	main(int ac, char **av)
 		parser(stacks, av, ac);
 		solver(stacks);
 	}
+	print_stacks(stacks);
 	return (0);
 }

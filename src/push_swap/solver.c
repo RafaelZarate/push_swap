@@ -6,97 +6,143 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 23:50:10 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/23 09:32:27 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/25 03:46:45 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	sort_b(t_stacks *stacks)
+void	sort_b_1(t_stacks *stacks, char **b_op)
 {
-	int	first;
-	int	second;
-	int	last;
-
 	if (stacks->b)
 	{
-		while (!check_if_rev_sorted(stacks))
+		get_current_position(stacks);
+		if (stacks->b_first < stacks->min_b)
+			*b_op = ft_strdup("rb");
+		else if (stacks->b_first < stacks->b_second)
+			*b_op = ft_strdup("sb");
+		else if (stacks->b_last > stacks->b_second)
+			*b_op = ft_strdup("rrb");
+		else
+			*b_op = NULL;
+	}
+	else
+		*b_op = NULL;
+}
+
+void	sort_a_1(t_stacks *stacks, char **a_op)
+{
+	if (stacks->a)
+	{
+		get_current_position(stacks);
+		if (stacks->a_first == stacks->max_a)
+			*a_op = ft_strdup("ra");
+		else if (stacks->a_first > stacks->a_second)
+			*a_op = ft_strdup("sa");
+		else if (stacks->a_last < stacks->a_second)
+			*a_op = ft_strdup("rra");
+		else
 		{
-			get_current_position(stacks);
-			first = stacks->b_first;
-			second = stacks->b_second;
-			last = stacks->b_last;
-			if (first < second && first < last)
-				do_rb(stacks);
-			else if (first < second && first > last)
-				do_sb(stacks);
-			else if (last > first && last > second)
-				do_rrb(stacks);
-			else
-			{
-				while (!(first < second && first > last))
-				{
-					get_current_position(stacks);
-					first = stacks->b_first;
-					second = stacks->b_second;
-					last = stacks->b_last;
-					do_rrb(stacks);
-				}
-			}
-			print_stacks(stacks);
-			// ft_putstr("LOLB");
-		}
-		while (stacks->b)  
-		{
-			do_pa(stacks);
-			print_stacks(stacks);
+			*a_op = ft_strdup("pb");
 		}
 	}
 }
 
-
-
-void	sort_a(t_stacks *stacks)
+static	int	get_position_of_max(t_stacks *stacks)
 {
-	int	first;
-	int	second;
-	int	last;
+	int		c;
+	t_stack	*b;
 
-	while (!check_if_sorted(stacks))// && (stacks->a_first > stacks->b_first))
+	c = 0;
+	b = stacks->b;
+	while (b)
+	{
+		c++;
+		if (b->n == stacks->max_b)
+			return (c);
+		b = b->next;
+	}
+	return (0);
+}
+
+void	return_to_a_1(t_stacks *stacks)
+{
+	while (stacks->b)
 	{
 		get_current_position(stacks);
-		first = stacks->a_first;
-		second = stacks->a_second;
-		last = stacks->a_last;
-		if (first > second && first > last)
-			do_ra(stacks);
-		else if (last < first && last < second)
-			do_rra(stacks);
-		else if (first > second && first < last)
-			do_sa(stacks);
+		if (stacks->b_first == stacks->max_b)
+			handle_ops("pa", stacks);
+		else if (stacks->b_last == stacks->max_b)
+		{
+			handle_ops("rrb", stacks);
+			handle_ops("pa", stacks);
+		}
+		else if (stacks->b_second == stacks->max_b)
+		{
+			handle_ops("sb", stacks);
+			handle_ops("pa", stacks);
+		}
 		else
-			do_pb(stacks);
-		print_stacks(stacks);
-		// ft_putstr("LOLA");
+		{
+			stacks->max_b_pos = get_position_of_max(stacks);
+			stacks->length_b += (stacks->length_b % 2 == 0) ? 0 : 1;
+			if (stacks->max_b_pos <= (stacks->length_b / 2))
+			{
+				while (--stacks->max_b_pos)
+					handle_ops("rb", stacks);
+			}
+			else
+			{
+				stacks->max_b_pos = stacks->length_b - stacks->max_b_pos + 2;
+				while (--stacks->max_b_pos)
+					handle_ops("rrb", stacks);
+			}
+			handle_ops("pa", stacks);
+		}
 	}
 }
 
 void			solver(t_stacks *stacks)
 {
-	ft_putstr("Initial stack: ");
-	t_stack *a;
-	a = stacks->a;
-	while (a)
+	char	*a_op;
+	char	*b_op;
+	
+	ft_putstr("Initial stack: \n");
+	print_stacks(stacks);
+	while (!check_if_sorted(stacks) || (stacks->min_a < stacks->max_b))
 	{
-		ft_putnbr(a->n);
-		a = a->next;
+		sort_a(stacks, &a_op);
+		sort_b(stacks, &b_op);
+		if (b_op != NULL)
+		{
+			if (ft_strcmp(a_op, "ra") == 0 && ft_strcmp(b_op, "rb") == 0)
+				handle_ops("rr", stacks);
+			else if (ft_strcmp(a_op, "sa") == 0 && ft_strcmp(b_op, "sb") == 0)
+				handle_ops("ss", stacks);
+			else if (ft_strcmp(a_op, "rra") == 0 && ft_strcmp(b_op, "rrb") == 0)
+				handle_ops("rrr", stacks);
+			else if (ft_strcmp(a_op, "pb") != 0)
+				handle_ops(a_op, stacks);
+			else if (ft_strcmp(a_op, "pb") == 0)
+			{
+				if (b_op)
+					handle_ops(b_op, stacks);
+				handle_ops(a_op, stacks);
+			}
+		}
+		else if (ft_strcmp(a_op, "pb") != 0)
+			handle_ops(a_op, stacks);
+		else if (ft_strcmp(a_op, "pb") == 0)
+		{
+			if (b_op)
+				handle_ops(b_op, stacks);
+			handle_ops(a_op, stacks);
+		}
+		if (a_op != NULL)
+			ft_strdel(&a_op);
+		if (b_op != NULL)
+			ft_strdel(&b_op);
 	}
-	ft_putchar('\n');
-	sort_a(stacks);
-	sort_b(stacks);
-	// while(stacks->a)
-	// {
-	// 	ft_putnbr(stacks->a->n);
-	// 	stacks->a = stacks->a->next;
-	// }
+	return_to_a(stacks);
+	ft_putnbr(stacks->n_ops);
 }

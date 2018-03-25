@@ -18,7 +18,8 @@ CFILES_P = src/libft/libft.a \
 			src/push_swap/main_ps.c \
 			src/push_swap/solver.c \
 			src/push_swap/validator_parser.c \
-			src/push_swap/list_functions.c \
+			src/push_swap/stacks_ll_functions.c \
+			src/push_swap/queue_ll_functions.c \
 			src/push_swap/operations_1.c \
 			src/push_swap/operations_2.c \
 			src/push_swap/operations_3.c \

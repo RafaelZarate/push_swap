@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 05:16:50 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/23 05:17:05 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/25 01:33:23 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	do_rr(t_stacks *stacks)
 		current->next = tmp;
 		tmp->next = NULL;
 	}
-	ft_putstr("rr");
+	ft_putstr("rr\n");
 }
 
 void	do_rrr(t_stacks *stacks)
@@ -88,5 +88,5 @@ void	do_rrr(t_stacks *stacks)
 	tmp->next = stacks->b;
 	stacks->b = tmp;
 	current->next = NULL;
-	ft_putstr("rrbr");
+	ft_putstr("rrr\n");
 }

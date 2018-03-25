@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 06:33:15 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/23 09:13:50 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/24 21:55:09 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,15 @@ void	get_current_position(t_stacks *stacks)
 			stacks->b_last = b->n;
 		}
 	}
+	get_min_max(stacks);
 }
 
 int	check_if_rev_sorted(t_stacks *stacks)
 {
 	t_stack	*b;
+	int c;
 
+	c = 0;
 	b = stacks->b;
 	if (b == NULL)
 		return (0);
@@ -89,11 +92,12 @@ int	check_if_rev_sorted(t_stacks *stacks)
 	{
 		while (b->next != NULL)
 		{
+			c++;
 			if (b->n < b->next->n)
-				return (0);
+				return (c);
 			b = b->next;
 		}
-		return (1);
+		return (0);
 	}
 }
 

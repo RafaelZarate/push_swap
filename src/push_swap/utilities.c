@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:56:57 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/23 09:25:56 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/25 03:46:55 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	put_error(int n)
 
 void	handle_ops(char *operations, t_stacks *stacks)
 {
+	stacks->n_ops += 1;
 	if (ft_strcmp(operations, "sa") == 0)
 		do_sa(stacks);
 	else if (ft_strcmp(operations, "sb") == 0)
@@ -44,6 +45,7 @@ void	handle_ops(char *operations, t_stacks *stacks)
 		do_rrr(stacks);
 	else
 		put_error(4);
+	// print_stacks(stacks);
 }
 
 void	print_stacks(t_stacks *stacks)
@@ -74,29 +76,44 @@ void	get_min_max(t_stacks *stacks)
 {
 	t_stack	*a;
 	t_stack	*b;
-	int		min;
-	int		max;
 
-	max = INT_MIN;
-	min = INT_MAX;
+	stacks->max_a = INT_MIN;
+	stacks->min_a = INT_MAX;
+	stacks->max_b = INT_MIN;
+	stacks->min_b = INT_MAX;
 	a = stacks->a;
 	b = stacks->b;
 	while (a)
 	{
-		if (a->n > max)
-			max = a->n;
-		if (a->n < min)
-			min = a->n;
+		if (a->n > stacks->max_a)
+			stacks->max_a = a->n;
+		if (a->n < stacks->min_a)
+			stacks->min_a = a->n;
 		a = a->next;
 	}
-	max = INT_MIN;
-	min = INT_MAX;
 	while (b)
 	{
-		if (b->n > max)
-			max = b->n;
-		if (b->n < min)
-			min = b->n;
+		if (b->n > stacks->max_b)
+			stacks->max_b = b->n;
+		if (b->n < stacks->min_b)
+			stacks->min_b = b->n;
 		b = b->next;
 	}
+}
+
+static	int	get_position_of_max(t_stacks *stacks)
+{
+	int		c;
+	t_stack	*b;
+
+	c = 0;
+	b = stacks->b;
+	while (b)
+	{
+		c++;
+		if (b->n == stacks->max_b)
+			return (c);
+		b = b->next;
+	}
+	return (0);
 }

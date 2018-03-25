@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 03:18:40 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/23 09:10:18 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/24 21:54:07 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,23 @@ typedef struct		s_numbers
 	struct s_numbers	*next;
 }					t_stack;
 
+typedef struct		s_queue
+{
+	int				op;
+	struct s_queue	*next;
+}					t_queue;
+
 typedef	struct	s_stacks
 {
 	t_stack	*a;
 	t_stack	*b;
+	t_queue	*q;
 	int		n_ops;
 	int		length_a;
 	int		length_b;
 	int		max_a;
 	int		max_b;
+	int		max_b_pos;
 	int		min_a;
 	int		min_b;
 	int		a_first;
@@ -64,10 +72,11 @@ void		print_stacks(t_stacks *stacks);
 
 void		solver(t_stacks *stacks);
 void		get_current_position(t_stacks *stacks);
+void		get_min_max(t_stacks *stacks);
 int			check_if_sorted(t_stacks *stacks);
 int			check_if_rev_sorted(t_stacks *stacks);
-void		sort_a(t_stacks *stacks);
-void		sort_b(t_stacks *stacks);
+void		sort_a(t_stacks *stacks, char **a_op);
+void		sort_b(t_stacks *stacks, char **b_op);
 
 /*
 **	OPERATIONS
@@ -93,5 +102,9 @@ t_stack		*stack_new(int num);
 void		stack_add(t_stack **stack, t_stack *new);
 void		stack_del(t_stack **stack);
 void		stack_del(t_stack **stack);
+t_queue		*queue_new(char **op);;
+void		queue_add(t_queue **q, t_queue *new);
+void		queue_add(t_queue **q, t_queue *new);
+void		queue_add(t_queue **q, t_queue *new);
 
 #endif
