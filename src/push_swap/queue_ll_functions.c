@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 16:46:32 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/24 18:50:06 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/25 04:06:58 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 // 	}
 // }
 
-// void	queue_add(t_queue **q, t_queue *new)
+// void	queue_remove(t_queue **q, t_queue *new)
 // {
 // 	t_queue *queue;
 // 	t_queue	*tmp;
@@ -65,7 +65,7 @@
 // 	}
 // }
 
-// void	queue_add(t_queue **q, t_queue *new)
+// void	queue_del(t_queue **q, t_queue *new)
 // {
 // 	t_queue *queue;
 

@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 03:18:40 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/24 21:54:07 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/25 03:48:26 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,9 @@ void		get_current_position(t_stacks *stacks);
 void		get_min_max(t_stacks *stacks);
 int			check_if_sorted(t_stacks *stacks);
 int			check_if_rev_sorted(t_stacks *stacks);
-void		sort_a(t_stacks *stacks, char **a_op);
-void		sort_b(t_stacks *stacks, char **b_op);
+void		sort_a_1(t_stacks *stacks, char **a_op);
+void		sort_b_1(t_stacks *stacks, char **b_op);
+void		return_to_a_1(t_stacks *stacks);
 
 /*
 **	OPERATIONS

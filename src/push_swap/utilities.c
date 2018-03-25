@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:56:57 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/25 03:46:55 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/25 04:11:18 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,38 @@ static	int	get_position_of_max(t_stacks *stacks)
 		b = b->next;
 	}
 	return (0);
+}
+
+static	int	get_median(t_stack *stack, int length)
+{
+	t_stack	*new;
+	t_stack	*tmp;
+	int		c;
+	int		pos;
+	int		n;
+
+	length++;
+	c = 0;
+	tmp = stack;
+	while (--length)
+	{
+		stack = tmp;
+		n = INT_MIN;
+		while (stack)
+		{
+			c++;
+			if (stack->n > n)
+			{
+				n = stack->n;
+				pos = c;
+			}
+			stack = stack->next;
+		}
+		stack = tmp;
+		while (--pos)
+			stack = stack->next;
+		stack_delone(&stack);
+		stack_add(&new, stack_new(n));
+	}
+
 }

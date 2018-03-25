@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 03:47:44 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/22 08:02:44 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/25 04:08:55 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,15 @@ void		stack_add(t_stack **stack, t_stack *new)
 
 void		stack_delone(t_stack **stack)
 {
+	t_stack *s;
+	t_stack	*tmp;
+
 	if (stack && *stack)
 	{
-		free(*stack);
-		*stack = NULL;
+		s = *stack;
+		tmp = s;
+		s = s->next;
+		ft_memdel(&tmp);
 	}
 }
 
