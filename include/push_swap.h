@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 03:18:40 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/25 03:48:26 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/26 19:27:08 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@ typedef struct		s_numbers
 	int					n;
 	struct s_numbers	*next;
 }					t_stack;
+
+typedef	struct		s_sols
+{
+	int				a_op[2];
+	int				b_op[2];
+	int				mixed_ops[4];
+	int				c_ops;
+	struct	s_sols	*next;
+}					t_sols;
 
 typedef struct		s_queue
 {
@@ -73,11 +82,17 @@ void		print_stacks(t_stacks *stacks);
 void		solver(t_stacks *stacks);
 void		get_current_position(t_stacks *stacks);
 void		get_min_max(t_stacks *stacks);
-int			check_if_sorted(t_stacks *stacks);
+int			get_position_of_max(t_stacks *stacks);
+int			check_if_sorted(t_stack *stack);
 int			check_if_rev_sorted(t_stacks *stacks);
 void		sort_a_1(t_stacks *stacks, char **a_op);
 void		sort_b_1(t_stacks *stacks, char **b_op);
 void		return_to_a_1(t_stacks *stacks);
+
+void		algorithm_2(t_stacks *stacks);
+int			get_median_1(t_stack *stack, int length);
+int			get_median_2(t_stack *stack, int length);
+
 
 /*
 **	OPERATIONS
@@ -101,7 +116,7 @@ void		do_rrr(t_stacks *stacks);
 
 t_stack		*stack_new(int num);
 void		stack_add(t_stack **stack, t_stack *new);
-void		stack_del(t_stack **stack);
+void		stack_delone(t_stack **stack);
 void		stack_del(t_stack **stack);
 t_queue		*queue_new(char **op);;
 void		queue_add(t_queue **q, t_queue *new);

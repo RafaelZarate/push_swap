@@ -6,68 +6,63 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 23:50:10 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/25 03:51:51 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/26 19:48:30 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	algorithm_1(t_stacks *stacks)
-{	
-	char	*a_op;
-	char	*b_op;
-	
-	while (!check_if_sorted(stacks) || (stacks->min_a < stacks->max_b))
-	{
-		sort_a(stacks, &a_op);
-		sort_b(stacks, &b_op);
-		if (b_op != NULL)
-		{
-			if (ft_strcmp(a_op, "ra") == 0 && ft_strcmp(b_op, "rb") == 0)
-				handle_ops("rr", stacks);
-			else if (ft_strcmp(a_op, "sa") == 0 && ft_strcmp(b_op, "sb") == 0)
-				handle_ops("ss", stacks);
-			else if (ft_strcmp(a_op, "rra") == 0 && ft_strcmp(b_op, "rrb") == 0)
-				handle_ops("rrr", stacks);
-			else if (ft_strcmp(a_op, "pb") != 0)
-				handle_ops(a_op, stacks);
-			else if (ft_strcmp(a_op, "pb") == 0)
-			{
-				if (b_op)
-					handle_ops(b_op, stacks);
-				handle_ops(a_op, stacks);
-			}
-		}
-		else if (ft_strcmp(a_op, "pb") != 0)
-			handle_ops(a_op, stacks);
-		else if (ft_strcmp(a_op, "pb") == 0)
-		{
-			if (b_op)
-				handle_ops(b_op, stacks);
-			handle_ops(a_op, stacks);
-		}
-		if (a_op != NULL)
-			ft_strdel(&a_op);
-		if (b_op != NULL)
-			ft_strdel(&b_op);
-	}
-	return_to_a(stacks);
+void	push_to_b(t_stacks *stacks, int	upper_limit, int lower_limit)
+{
+	get_current_position(stacks);
+	if (stacks->a == NULL || stacks->min_a > upper_limit)
+		return ;
+	if (stacks->a_first <= upper_limit && stacks->a_first > lower_limit)
+		handle_ops("pb", stacks);
+	else
+		handle_ops("ra", stacks);
+	print_stacks(stacks);
+	push_to_b(stacks, upper_limit, lower_limit);
+}
+
+void	return_partition_to_a(t_stacks *stacks, int	upper_limit, int lower_limit)
+{
+	t_sols	*solutions;
+
+	solutions = (t_sols *)ft_memalloc(t_sols);
 }
 
 void	algorithm_2(t_stacks *stacks)
 {
+
+	int	median_1;
+	int	median_2;
 	
+	median_1 = get_median_1(stacks->a, stacks->length_a);
+	median_2 = get_median_2(stacks->a, stacks->length_a);
+	get_current_position(stacks);
+	// push_to_b(stacks, median_1, stacks->min_a - 1);
+	// push_to_b(stacks, median_2, median_1);
+	// push_to_b(stacks, stacks->max_a, median_2);
+	// ft_putnbr(median_1);ft_putchar('\n');
+	// ft_putnbr(median_2);ft_putchar('\n');
+	// ft_putnbr(stacks->max_a);ft_putchar('\n');
+	// print_stacks(stacks);
+	return_partition_to_a(stacks, median_2, median_1);
+
 }
 
 void	solver(t_stacks *stacks)
 {
-	ft_putstr("Initial stack: \n");
-	print_stacks(stacks);
+	// ft_putstr("Initial stack: \n");
+	// print_stacks(stacks);
 
-	if (stacks->length_a < 75)
-		algorithm_1(stacks);
-	else
-		algorith_2(stacks);
+	// if (stacks->length_a < 75)
+	// 	algorithm_1(stacks);
+	// else
+	algorithm_2(stacks);
 
-	ft_putnbr(stacks->n_ops);
+	// ft_putstr("Length A: ");ft_putnbr(stacks->length_a);ft_putchar('\n');
+	// ft_putstr("Length B: ");ft_putnbr(stacks->length_b);ft_putchar('\n');
+	ft_putstr("# of ops: ");ft_putnbr(stacks->n_ops);ft_putchar('\n');
 }

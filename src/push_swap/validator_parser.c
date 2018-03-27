@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 06:33:15 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/24 21:55:09 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/26 14:49:19 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,11 @@ int	check_if_rev_sorted(t_stacks *stacks)
 	}
 }
 
-int	check_if_sorted(t_stacks *stacks)
+int	check_if_sorted(t_stack *stack)
 {
 	t_stack	*a;
 
-	a = stacks->a;
+	a = stack;
 	if (a == NULL)
 		return (0);
 	else

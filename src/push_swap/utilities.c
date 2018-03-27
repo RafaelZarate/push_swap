@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:56:57 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/25 04:11:18 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/26 18:39:31 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	get_min_max(t_stacks *stacks)
 	}
 }
 
-static	int	get_position_of_max(t_stacks *stacks)
+int		get_position_of_max(t_stacks *stacks)
 {
 	int		c;
 	t_stack	*b;
@@ -118,36 +118,116 @@ static	int	get_position_of_max(t_stacks *stacks)
 	return (0);
 }
 
-static	int	get_median(t_stack *stack, int length)
+void		swap(int *a, int *b)
 {
-	t_stack	*new;
-	t_stack	*tmp;
-	int		c;
-	int		pos;
-	int		n;
-
-	length++;
-	c = 0;
-	tmp = stack;
-	while (--length)
-	{
-		stack = tmp;
-		n = INT_MIN;
-		while (stack)
-		{
-			c++;
-			if (stack->n > n)
-			{
-				n = stack->n;
-				pos = c;
-			}
-			stack = stack->next;
-		}
-		stack = tmp;
-		while (--pos)
-			stack = stack->next;
-		stack_delone(&stack);
-		stack_add(&new, stack_new(n));
-	}
-
+	int	tmp;
+	
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
+
+int			*generate_array(t_stack *stack, int length)
+{
+	int	*a;
+	int i;
+
+	i = 0;
+	a = (int *)ft_memalloc(sizeof(int) * length);
+	while (stack)
+	{
+		a[i] = stack->n;
+		stack = stack->next;
+		i++;
+	}
+	return (a);
+}
+
+int		*sort_median(t_stack *stack, int length)
+{
+	int i;
+	int j;
+	int	*a;
+
+	i = -1;
+	a = generate_array(stack, length);
+	while (++i < length -1)
+	{
+		j = -1;
+		while (++j < length - i - 1)
+		{
+			if (a[j] > a[j + 1])
+				swap(&a[j], &a[j + 1]);
+		}
+	}
+	return (a);
+}
+
+int			get_median_1(t_stack *stack, int length)
+{
+	int	*a;
+	int	n;
+	
+	if (length == 1)
+		return (stack->n);
+	a = sort_median(stack, length);
+	n = (((length + 1) / 3) - length % 3) - 1;
+	free(a);
+	return (a[n]);
+}
+
+int			get_median_2(t_stack *stack, int length)
+{
+	int	*a;
+	int	n;
+	
+	if (length == 1)
+		return (stack->n);
+	a = sort_median(stack, length);
+	n = ((((length + 1) / 3) * 2) - length % 3) - 1;
+	free(a);
+	return (a[n]);
+}
+
+// int			get_median(t_stack *stack, int length)
+// {
+// 	t_stack	*new;
+// 	t_stack	*tmp;
+// 	t_stack	*h_tmp;
+// 	int		c;
+// 	int		len;
+// 	int		pos;
+// 	int		n;
+
+// 	len = length + 1;
+// 	c = 0;
+// 	tmp = stack;
+// 	h_tmp = tmp;
+// 	while (--len)
+// 	{
+// 		stack = h_tmp;
+// 		n = INT_MIN;
+// 		while (stack)
+// 		{
+// 			c++;
+// 			if (stack->n > n)
+// 			{
+// 				n = stack->n;
+// 				pos = c;
+// 			}
+// 			stack = stack->next;
+// 		}
+// 		tmp = h_tmp;
+// 		while (--pos)
+// 			tmp = tmp->next;
+// 		stack_delone(&tmp);
+// 		stack_add(&new, stack_new(n));
+// 	}
+// 	length /= 2;
+// 	while (--length > -1)
+// 		new = new->next;
+// 	if (length % 2 != 0)
+// 		return (new->n);
+// 	else
+// 		return ((new->n + new->next->n) / 2);
+// }

@@ -23,7 +23,8 @@ CFILES_P = src/libft/libft.a \
 			src/push_swap/operations_1.c \
 			src/push_swap/operations_2.c \
 			src/push_swap/operations_3.c \
-			src/push_swap/utilities.c
+			src/push_swap/utilities.c \
+			src/push_swap/algorithm_1.c
 
 OBJECTS_C = $(CFILES_C:.c=.o)
 OBJECTS_P = $(CFILES_P:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 03:48:45 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/25 03:49:06 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/26 15:05:01 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,46 @@ void	return_to_a_1(t_stacks *stacks)
 			handle_ops("pa", stacks);
 		}
 	}
+}
+
+void	algorithm_1(t_stacks *stacks)
+{	
+	char	*a_op;
+	char	*b_op;
+	
+	while (!check_if_sorted(stacks->a) || (stacks->min_a < stacks->max_b))
+	{
+		sort_a_1(stacks, &a_op);
+		sort_b_1(stacks, &b_op);
+		if (b_op != NULL)
+		{
+			if (ft_strcmp(a_op, "ra") == 0 && ft_strcmp(b_op, "rb") == 0)
+				handle_ops("rr", stacks);
+			else if (ft_strcmp(a_op, "sa") == 0 && ft_strcmp(b_op, "sb") == 0)
+				handle_ops("ss", stacks);
+			else if (ft_strcmp(a_op, "rra") == 0 && ft_strcmp(b_op, "rrb") == 0)
+				handle_ops("rrr", stacks);
+			else if (ft_strcmp(a_op, "pb") != 0)
+				handle_ops(a_op, stacks);
+			else if (ft_strcmp(a_op, "pb") == 0)
+			{
+				if (b_op)
+					handle_ops(b_op, stacks);
+				handle_ops(a_op, stacks);
+			}
+		}
+		else if (ft_strcmp(a_op, "pb") != 0)
+			handle_ops(a_op, stacks);
+		else if (ft_strcmp(a_op, "pb") == 0)
+		{
+			if (b_op)
+				handle_ops(b_op, stacks);
+			handle_ops(a_op, stacks);
+		}
+		if (a_op != NULL)
+			ft_strdel(&a_op);
+		if (b_op != NULL)
+			ft_strdel(&b_op);
+	}
+	return_to_a_1(stacks);
 }
