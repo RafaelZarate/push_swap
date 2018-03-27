@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 03:18:40 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/26 19:27:08 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/27 02:40:19 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ typedef struct		s_numbers
 
 typedef	struct		s_sols
 {
-	int				a_op[2];
-	int				b_op[2];
-	int				mixed_ops[4];
+	int				*a_op;
+	int				*b_op;
+	int				*mixed_ops;
 	int				c_ops;
 	struct	s_sols	*next;
 }					t_sols;
@@ -49,6 +49,9 @@ typedef	struct	s_stacks
 	int		max_b_pos;
 	int		min_a;
 	int		min_b;
+	int		partition_1_length;
+	int		partition_2_length;
+	int		partition_3_length;
 	int		a_first;
 	int		a_second;
 	int		a_last;
@@ -90,8 +93,8 @@ void		sort_b_1(t_stacks *stacks, char **b_op);
 void		return_to_a_1(t_stacks *stacks);
 
 void		algorithm_2(t_stacks *stacks);
-int			get_median_1(t_stack *stack, int length);
-int			get_median_2(t_stack *stack, int length);
+int			get_median_1(t_stack *stack, int length, t_stacks **stacks);
+int			get_median_2(t_stack *stack, int length, t_stacks **stacks);
 
 
 /*

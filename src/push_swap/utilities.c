@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:56:57 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/26 18:39:31 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/27 02:40:27 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ int		*sort_median(t_stack *stack, int length)
 	return (a);
 }
 
-int			get_median_1(t_stack *stack, int length)
+int			get_median_1(t_stack *stack, int length, t_stacks **stacks)
 {
 	int	*a;
 	int	n;
@@ -172,11 +172,12 @@ int			get_median_1(t_stack *stack, int length)
 		return (stack->n);
 	a = sort_median(stack, length);
 	n = (((length + 1) / 3) - length % 3) - 1;
+	(*stacks)->partition_1_length = n + 1;
 	free(a);
 	return (a[n]);
 }
 
-int			get_median_2(t_stack *stack, int length)
+int			get_median_2(t_stack *stack, int length, t_stacks **stacks)
 {
 	int	*a;
 	int	n;
@@ -185,6 +186,7 @@ int			get_median_2(t_stack *stack, int length)
 		return (stack->n);
 	a = sort_median(stack, length);
 	n = ((((length + 1) / 3) * 2) - length % 3) - 1;
+	(*stacks)->partition_2_length = n + 1;
 	free(a);
 	return (a[n]);
 }
