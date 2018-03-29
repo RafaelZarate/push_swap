@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 23:50:10 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/28 06:49:24 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/28 17:26:11 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ void	create_solution(t_stacks *stacks, int i, t_sols **solutions, int orientatio
 	// mixed_ops = (int *)ft_memalloc(sizeof(int) * 4);
 	b_ops[0] = (orientation == 1) ? 3 : 4;
 	b_ops[1] = (orientation == 1) ? i : stacks->length_b - i;
+	mixed_ops[2] = 0;
+	mixed_ops[3] = 0;
 	tmp = stacks->b;
 	i++;
 	while (--i)
 		tmp = tmp->next;
 	temp_n = tmp->n;
-	tmp = stacks->b;
+	tmp = stacks->a;
 	i_a = 0;
-	while (tmp->next)
+	while (tmp && tmp->next)
 	{
 		if (temp_n > tmp->n && temp_n < tmp->next->n)
 			break ;
