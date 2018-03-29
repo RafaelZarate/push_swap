@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 03:18:40 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/27 02:40:19 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/28 06:39:56 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,9 @@ t_queue		*queue_new(char **op);;
 void		queue_add(t_queue **q, t_queue *new);
 void		queue_add(t_queue **q, t_queue *new);
 void		queue_add(t_queue **q, t_queue *new);
+t_sols		*solutions_new(int	a_op[2], int b_op[2], int mixed_ops[4], int c_ops);
+void		solutions_add(t_sols	**solutions, t_sols *new);
+void		solutions_delone(t_sols **solutions);
+void		solutions_delete(t_sols **solutions);
 
 #endif
