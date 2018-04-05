@@ -6,7 +6,7 @@
 /*   By: rzarate <rzarate@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 03:18:40 by rzarate           #+#    #+#             */
-/*   Updated: 2018/03/28 06:39:56 by rzarate          ###   ########.fr       */
+/*   Updated: 2018/03/28 19:58:57 by rzarate          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,10 @@ void		return_to_a_1(t_stacks *stacks);
 void		algorithm_2(t_stacks *stacks);
 int			get_median_1(t_stack *stack, int length, t_stacks **stacks);
 int			get_median_2(t_stack *stack, int length, t_stacks **stacks);
-
+void		perform_best_solution(t_stacks *stacks, t_sols **solutions);
+void		return_partitions_to_a(t_stacks *stacks);
+void		create_solution(t_stacks *stacks, int i, t_sols **solutions, int orientation);
+void		push_to_b(t_stacks *stacks, int	upper_limit, int lower_limit);
 
 /*
 **	OPERATIONS
